@@ -10,7 +10,7 @@ function Weather() {
 
   const fetchWeather = () => {
     const apiKey = "3ba340eb358c48d08ae154329231810";
-    const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=London&days=7`;
+    const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=Berlin&days=7`;
 
     fetch(apiUrl)
       .then((response) => {
@@ -32,39 +32,63 @@ function Weather() {
 
   return (
     <div className="weather-container">
-      <h1>Wheather fetch</h1>
-
       {weatherData && (
-        <div>
-          <h2>Location: {weatherData.location.name}</h2>
-          <h3>Region: {weatherData.location.region}</h3>
-          <h3>Country: {weatherData.location.country}</h3>
-          <h3>Local time: {weatherData.location.localtime}</h3>
+        <div className="weather-content">
+          <h2>
+            Location: {weatherData.location.name},{" "}
+            {weatherData.location.country}
+          </h2>
+          <h4>{weatherData.location.localtime}</h4>
+
           <h3>Temperature: {weatherData.current.temp_c}°C</h3>
           <h3>Feels Like: {weatherData.current.feelslike_c}°C</h3>
 
-          <h3>Humidity: {weatherData.current.humidity}%</h3>
-          <h3>UV Index: {weatherData.current.uv}</h3>
-          <h3>Visibility: {weatherData.current.vis_km} km</h3>
-          <h3>
-            Wind: {weatherData.current.wind_dir} at{" "}
-            {weatherData.current.wind_kph} km/h
-          </h3>
+          <div className="info-box">
+            <div className="box">
+              <h3>
+                <span>Humidity:</span> {weatherData.current.humidity}%
+              </h3>
+            </div>
 
-          <h3>Sunrise: {weatherData.forecast.forecastday[0].astro.sunrise}</h3>
-          <h3>Sunset: {weatherData.forecast.forecastday[0].astro.sunset}</h3>
+            <div className="box">
+              <h3>
+                <span>UV Index:</span> {weatherData.current.uv}
+              </h3>
+            </div>
 
-          <div>
-            <h3>
-              Chance of Rain:{" "}
-              {weatherData.forecast.forecastday[0].day.daily_chance_of_rain}%
-            </h3>
-            <h3>
-              Will It Rain?{" "}
-              {weatherData.forecast.forecastday[0].day.daily_will_it_rain
-                ? "Yes"
-                : "No"}
-            </h3>
+            <div className="box">
+              <h3>
+                <span>Visibility:</span> {weatherData.current.vis_km} km
+              </h3>
+            </div>
+
+            <div className="box">
+              <h3>
+                <span>Wind:</span> {weatherData.current.wind_dir} at{" "}
+                {weatherData.current.wind_kph} km/h
+              </h3>
+            </div>
+
+            <div className="box">
+              <h3>
+                <span>Sunrise: </span>
+                {weatherData.forecast.forecastday[0].astro.sunrise}
+              </h3>
+            </div>
+
+            <div className="box">
+              <h3>
+                <span>Sunset:</span>{" "}
+                {weatherData.forecast.forecastday[0].astro.sunset}
+              </h3>
+            </div>
+
+            <div className="box">
+              <h3>
+                <span>Chance of Rain: </span>
+                {weatherData.forecast.forecastday[0].day.daily_chance_of_rain}%
+              </h3>
+            </div>
           </div>
 
           <h3>Condition: {weatherData.current.condition.text}</h3>
