@@ -5,11 +5,33 @@
 
 .info-box {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
   gap: 10px;
 }
 
 span {
   font-size: 17px;
   color: rgba(128, 128, 128, 0.801);
+  margin-bottom: -20px;
+}
+
+.current-temp {
+  font-size: 25px;
+}
+
+.condition-icon {
+  width: 100px;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.temp-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: -30px;
 }
