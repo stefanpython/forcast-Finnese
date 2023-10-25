@@ -4,6 +4,13 @@ import "./Weather.css";
 function Weather() {
   const [weatherData, setWeatherData] = useState("");
 
+  function formatDate(dateString) {
+    const options = {
+      weekday: "long",
+    };
+    return new Date(dateString).toLocaleDateString(undefined, options);
+  }
+
   useEffect(() => {
     fetchWeather();
   }, []);
@@ -34,11 +41,20 @@ function Weather() {
     <div className="weather-container">
       {weatherData && (
         <div className="weather-content">
-          <h2>
-            Location: {weatherData.location.name},{" "}
-            {weatherData.location.country}
+          <h2 className="location">
+            {weatherData.location.name}, {weatherData.location.country}
           </h2>
-          <h4>{weatherData.location.localtime}</h4>
+          <h4>
+            {new Date(weatherData.location.localtime).toLocaleDateString(
+              undefined,
+              {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              }
+            )}
+          </h4>
 
           <div className="temp-box">
             <img
@@ -54,53 +70,75 @@ function Weather() {
 
           <hr />
 
-          <div className="info-box">
-            <div className="box">
-              <span>Humidity:</span>
-              <h3>{weatherData.current.humidity}%</h3>
-            </div>
+          <div className="info-container">
+            <div className="info-box">
+              <div className="box">
+                <span>Humidity:</span>
+                <h3>{weatherData.current.humidity}%</h3>
+              </div>
 
-            <div className="box">
-              <span>UV Index:</span>
-              <h3>{weatherData.current.uv}</h3>
-            </div>
+              <div className="box">
+                <span>UV Index:</span>
+                <h3>{weatherData.current.uv}</h3>
+              </div>
 
-            <div className="box">
-              <span>Visibility:</span>
-              <h3>{weatherData.current.vis_km} km</h3>
-            </div>
+              <div className="box">
+                <span>Visibility:</span>
+                <h3>{weatherData.current.vis_km} km</h3>
+              </div>
 
-            <div className="box">
-              <span>Wind:</span>
-              <h3>
-                {weatherData.current.wind_dir} at {weatherData.current.wind_kph}{" "}
-                km/h
-              </h3>
-            </div>
+              <div className="box">
+                <span>Chance of Rain: </span>
+                <h3>
+                  {weatherData.forecast.forecastday[0].day.daily_chance_of_rain}
+                  %
+                </h3>
+              </div>
 
-            <div className="box">
-              <span>Sunrise: </span>
-              <h3>{weatherData.forecast.forecastday[0].astro.sunrise}</h3>
-            </div>
+              <div className="box">
+                <span>Sunrise: </span>
+                <h3>{weatherData.forecast.forecastday[0].astro.sunrise}</h3>
+              </div>
 
-            <div className="box">
-              <span>Sunset:</span>{" "}
-              <h3>{weatherData.forecast.forecastday[0].astro.sunset}</h3>
-            </div>
+              <div className="box">
+                <span>Sunset:</span>{" "}
+                <h3>{weatherData.forecast.forecastday[0].astro.sunset}</h3>
+              </div>
 
-            <div className="box">
-              <span>Chance of Rain: </span>
-              <h3>
-                {weatherData.forecast.forecastday[0].day.daily_chance_of_rain}%
-              </h3>
-            </div>
+              <div className="box">
+                <span>Wind:</span>
+                <h3>
+                  {weatherData.current.wind_dir} at{" "}
+                  {weatherData.current.wind_kph} km/h
+                </h3>
+              </div>
 
-            <div className="box">
-              <h3>
-                <span> </span>
-                {weatherData.forecast.forecastday[0].astro.moon_phase}
-              </h3>
+              <div className="box">
+                <h3>
+                  <span> </span>
+                  {weatherData.forecast.forecastday[0].astro.moon_phase}
+                </h3>
+              </div>
             </div>
+          </div>
+
+          <div className="forecast-days">
+            <h2>Weekly Forecast</h2>
+            {weatherData.forecast.forecastday.slice(1).map((day, index) => (
+              <div key={index} className="forecast-day">
+                <h3>{formatDate(day.date)}</h3>
+
+                <img
+                  className="forecast-icon"
+                  src={`https:${day.day.condition.icon}`}
+                  alt={day.day.condition.text}
+                />
+                <h4>{day.day.avgtemp_c}°C</h4>
+                <h4> {day.day.mintemp_c}°C</h4>
+                <h4>Wind: {day.day.maxwind_kph} km/h</h4>
+                <h4>Rain: {day.day.daily_chance_of_rain}%</h4>
+              </div>
+            ))}
           </div>
         </div>
       )}
