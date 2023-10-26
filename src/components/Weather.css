@@ -13,6 +13,7 @@
 .info-container {
   display: flex;
   justify-content: center;
+  margin-bottom: 50px;
 }
 
 hr {
@@ -53,27 +54,54 @@ span {
 
 /* Daily forcast */
 
+.forecast-days {
+  display: flex;
+  align-items: center;
+}
+
 .forecast-day {
+  background-color: rgba(192, 192, 192, 0.226);
+  margin: 5px;
+  border-radius: 15px;
+  padding-left: 15px;
+  width: 150px;
+}
+
+.day-icon {
   display: flex;
   align-items: center;
   justify-content: center;
+  margin-bottom: -10px;
 }
 
 .forecast-day h4 {
-  margin-right: 30px;
+  margin-right: 25px;
 }
 
 .forecast-icon {
   width: 50px;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 800px) {
   .forecast-day h4 {
     margin: 0;
   }
 
-  .forecast-day {
+  .forecast-days {
     display: flex;
     flex-direction: column;
   }
+
+  .forecast-day hr {
+    display: block !important;
+    width: 70%;
+    border: none;
+    border-top: 1px solid #ccc;
+    margin-right: 40px !important;
+  }
+}
+
+.forecast-day hr {
+  width: 60%;
+  margin-right: 35px;
 }

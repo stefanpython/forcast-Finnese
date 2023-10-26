@@ -17,7 +17,7 @@ function Weather() {
 
   const fetchWeather = () => {
     const apiKey = "3ba340eb358c48d08ae154329231810";
-    const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=Vietnam&days=7`;
+    const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=Pitesti&days=7`;
 
     fetch(apiUrl)
       .then((response) => {
@@ -122,21 +122,24 @@ function Weather() {
             </div>
           </div>
 
+          <h2>Weekly Forecast</h2>
           <div className="forecast-days">
-            <h2>Weekly Forecast</h2>
             {weatherData.forecast.forecastday.slice(1).map((day, index) => (
               <div key={index} className="forecast-day">
-                <h3>{formatDate(day.date)}</h3>
-
-                <img
-                  className="forecast-icon"
-                  src={`https:${day.day.condition.icon}`}
-                  alt={day.day.condition.text}
-                />
+                <div className="day-icon">
+                  <h3>{formatDate(day.date)}</h3>
+                  <img
+                    className="forecast-icon"
+                    src={`https:${day.day.condition.icon}`}
+                    alt={day.day.condition.text}
+                  />
+                </div>
                 <h4>{day.day.avgtemp_c}°C</h4>
-                <h4> {day.day.mintemp_c}°C</h4>
+                <h4>{day.day.mintemp_c}°C</h4>
                 <h4>Wind: {day.day.maxwind_kph} km/h</h4>
                 <h4>Rain: {day.day.daily_chance_of_rain}%</h4>
+
+                <hr />
               </div>
             ))}
           </div>
