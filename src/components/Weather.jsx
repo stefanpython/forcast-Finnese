@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import "./Weather.css";
 
-function Weather() {
+function Weather({ city }) {
   const [weatherData, setWeatherData] = useState("");
 
   function formatDate(dateString) {
@@ -13,11 +13,11 @@ function Weather() {
 
   useEffect(() => {
     fetchWeather();
-  }, []);
+  }, [city]);
 
   const fetchWeather = () => {
     const apiKey = "3ba340eb358c48d08ae154329231810";
-    const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=Pitesti&days=7`;
+    const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=7`;
 
     fetch(apiUrl)
       .then((response) => {
@@ -35,7 +35,7 @@ function Weather() {
       });
   };
 
-  console.log(weatherData);
+  console.log(city);
 
   return (
     <div className="weather-container">

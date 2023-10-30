@@ -1,12 +1,20 @@
 import "./App.css";
 import Weather from "./components/Weather";
+import Searchbar from "./components/Searchbar";
+import { useState } from "react";
 
 function App() {
+  const [city, setCity] = useState("Pitesti");
+
+  const handleSearch = (query) => {
+    setCity(query);
+  };
+
   return (
     <div className="App">
-      {/* <h1>ForcastFinnese</h1> */}
+      <Searchbar onSearch={handleSearch} />
 
-      <Weather />
+      <Weather city={city} />
     </div>
   );
 }
