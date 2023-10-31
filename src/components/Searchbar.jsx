@@ -7,6 +7,14 @@ function Searchbar({ onSearch }) {
 
   const handleSearch = () => {
     onSearch(query);
+    setQuery("");
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      handleSearch();
+      setQuery("");
+    }
   };
 
   return (
@@ -15,6 +23,7 @@ function Searchbar({ onSearch }) {
         type="text"
         placeholder="Enter location"
         value={query}
+        onKeyDown={handleKeyDown}
         onChange={(e) => setQuery(e.target.value)}
       />
       <button onClick={handleSearch}>Search</button>
