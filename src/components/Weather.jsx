@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./Weather.css";
+import PropTypes from "prop-types";
 
 function Weather({ city }) {
   const [weatherData, setWeatherData] = useState("");
@@ -150,3 +151,7 @@ function Weather({ city }) {
 }
 
 export default Weather;
+
+Weather.propTypes = {
+  city: PropTypes.string.isRequired,
+};
