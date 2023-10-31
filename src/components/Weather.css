@@ -82,7 +82,7 @@ span {
   width: 50px;
 }
 
-@media (max-width: 800px) {
+@media (max-width: 1049px) {
   .forecast-day h4 {
     margin: 0;
   }

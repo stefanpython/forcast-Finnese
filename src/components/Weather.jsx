@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 function Weather({ city }) {
   const [weatherData, setWeatherData] = useState("");
+  const [isMetric, setIsMetric] = useState(true);
 
   function formatDate(dateString) {
     const options = {
@@ -11,6 +12,11 @@ function Weather({ city }) {
     };
     return new Date(dateString).toLocaleDateString(undefined, options);
   }
+
+  // Change from kmh/C to mph/F
+  const handleTempChange = () => {
+    setIsMetric(!isMetric);
+  };
 
   useEffect(() => {
     fetchWeather();
@@ -36,12 +42,15 @@ function Weather({ city }) {
       });
   };
 
-  console.log(city);
+  console.log(weatherData);
 
   return (
     <div className="weather-container">
       {weatherData && (
         <div className="weather-content">
+          <br />
+          <button onClick={handleTempChange}>Mph/Kmp - F/C</button>
+
           <h2 className="location">
             {weatherData.location.name}, {weatherData.location.country}
           </h2>
@@ -63,11 +72,21 @@ function Weather({ city }) {
               src={`https:${weatherData.current.condition.icon}`}
               alt={weatherData.current.condition.text}
             />
-            <h3 className="current-temp"> {weatherData.current.temp_c}°C</h3>
+            <h3 className="current-temp">
+              {" "}
+              {isMetric
+                ? `${weatherData.current.temp_c}°C`
+                : `${weatherData.current.temp_f}°F`}
+            </h3>
           </div>
 
           <h3>{weatherData.current.condition.text}</h3>
-          <h4>Feels Like: {weatherData.current.feelslike_c}°C</h4>
+          <h4>
+            Feels Like:{" "}
+            {isMetric
+              ? `${weatherData.current.feelslike_c}°C`
+              : `${weatherData.current.feelslike_f}°F`}
+          </h4>
 
           <hr />
 
@@ -85,7 +104,11 @@ function Weather({ city }) {
 
               <div className="box">
                 <span>Visibility:</span>
-                <h3>{weatherData.current.vis_km} km</h3>
+                <h3>
+                  {isMetric
+                    ? `${weatherData.current.vis_km} km`
+                    : `${weatherData.current.vis_miles} miles`}
+                </h3>
               </div>
 
               <div className="box">
@@ -110,15 +133,20 @@ function Weather({ city }) {
                 <span>Wind:</span>
                 <h3>
                   {weatherData.current.wind_dir} at{" "}
-                  {weatherData.current.wind_kph} km/h
+                  {isMetric
+                    ? `${weatherData.current.wind_kph} km/h`
+                    : `${weatherData.current.wind_mph} mph`}
                 </h3>
               </div>
 
               <div className="box">
-                <h3>
-                  <span> </span>
-                  {weatherData.forecast.forecastday[0].astro.moon_phase}
-                </h3>
+                <span>Moonrise: </span>
+                <h3>{weatherData.forecast.forecastday[0].astro.moonrise}</h3>
+              </div>
+
+              <div className="box">
+                <span>Moonset:</span>{" "}
+                <h3>{weatherData.forecast.forecastday[0].astro.moonset}</h3>
               </div>
             </div>
           </div>
@@ -135,9 +163,22 @@ function Weather({ city }) {
                     alt={day.day.condition.text}
                   />
                 </div>
-                <h4>{day.day.avgtemp_c}°C</h4>
-                <h4>{day.day.mintemp_c}°C</h4>
-                <h4>Wind: {day.day.maxwind_kph} km/h</h4>
+                <h4>
+                  {isMetric
+                    ? `${day.day.maxtemp_c}°C`
+                    : `${day.day.maxtemp_f}°F`}
+                </h4>
+                <h4>
+                  {isMetric
+                    ? `${day.day.mintemp_c}°C`
+                    : `${day.day.mintemp_f}°F`}
+                </h4>
+                <h4>
+                  Wind:{" "}
+                  {isMetric
+                    ? `${day.day.maxwind_kph} km/h`
+                    : `${day.day.maxwind_mph} mph`}
+                </h4>
                 <h4>Rain: {day.day.daily_chance_of_rain}%</h4>
 
                 <hr />
