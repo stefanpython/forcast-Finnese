@@ -1,6 +1,7 @@
 .weather-container {
   display: flex;
   justify-content: center;
+  margin-top: -82px;
 }
 
 .info-box {
@@ -99,9 +100,29 @@ span {
     border-top: 1px solid #ccc;
     margin-right: 40px !important;
   }
+
+  .weather-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 0;
+  }
 }
 
 .forecast-day hr {
   width: 60%;
   margin-right: 35px;
+}
+
+.toggle-btn {
+  padding: 3px 10px;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.max-temp {
+  color: rgb(0, 195, 255);
+}
+
+.min-temp {
+  color: rgb(180, 108, 247);
 }

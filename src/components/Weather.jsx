@@ -49,7 +49,9 @@ function Weather({ city }) {
       {weatherData && (
         <div className="weather-content">
           <br />
-          <button onClick={handleTempChange}>Mph/Kmp - F/C</button>
+          <button className="toggle-btn" onClick={handleTempChange}>
+            {isMetric ? `Mph - °F` : `Km/h - °C`}
+          </button>
 
           <h2 className="location">
             {weatherData.location.name}, {weatherData.location.country}
@@ -163,12 +165,12 @@ function Weather({ city }) {
                     alt={day.day.condition.text}
                   />
                 </div>
-                <h4>
+                <h4 className="max-temp">
                   {isMetric
                     ? `${day.day.maxtemp_c}°C`
                     : `${day.day.maxtemp_f}°F`}
                 </h4>
-                <h4>
+                <h4 className="min-temp">
                   {isMetric
                     ? `${day.day.mintemp_c}°C`
                     : `${day.day.mintemp_f}°F`}
@@ -196,3 +198,5 @@ export default Weather;
 Weather.propTypes = {
   city: PropTypes.string.isRequired,
 };
+
+// Change temps color in weekly forecast

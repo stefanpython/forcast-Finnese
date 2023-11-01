@@ -18,15 +18,24 @@ function Searchbar({ onSearch }) {
   };
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Enter location"
-        value={query}
-        onKeyDown={handleKeyDown}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
+    <div className="search-container">
+      <div className="nav">
+        <img className="logo" src="./summer.png" alt="" />
+        <h1 className="title">Forecast Finnesse</h1>
+      </div>
+
+      <div className="search-right">
+        <input
+          type="text"
+          placeholder="Enter location"
+          value={query}
+          onKeyDown={handleKeyDown}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button className="search-btn" onClick={handleSearch}>
+          Search
+        </button>
+      </div>
     </div>
   );
 }

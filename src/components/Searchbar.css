@@ -1,0 +1,38 @@
+.search-container input {
+  padding: 5px;
+}
+
+.search-btn {
+  padding: 5px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.logo {
+  height: 60px;
+  margin-right: -20px;
+}
+
+@media (max-width: 718px) {
+  .search-container {
+    display: block;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .title {
+    font-size: 22px;
+  }
+  .logo {
+    height: 40px;
+  }
+}
