@@ -23,7 +23,7 @@ function Weather({ city }) {
   }, [city]);
 
   const fetchWeather = () => {
-    const apiKey = "3ba340eb358c48d08ae154329231810";
+    const apiKey = import.meta.env.VITE_APP_API_KEY;
     const apiUrl = `https://api.weatherapi.com/v1/forecast.json?key=${apiKey}&q=${city}&days=7`;
 
     fetch(apiUrl)
