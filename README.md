@@ -2,6 +2,8 @@
 
 This is a simple React-based weather app that allows you to search for weather information by city name. It provides real-time weather data for the specified city, including current conditions and a 3-day(limited free api) forecast.
 
+Click [HERE]() for demo.
+
 ## Features
 
 - Search for weather data by city name.
@@ -9,6 +11,7 @@ This is a simple React-based weather app that allows you to search for weather i
 - Provides a 3-day weather forecast(due to free limited api restrictions), including temperature, wind speed, and chance of rain.
 - Displays icons representing the weather conditions for easy visualization.
 - Supports dynamic updates for different cities.
+- Button to change units from metric to imperial
 
 ## Getting Started
 
